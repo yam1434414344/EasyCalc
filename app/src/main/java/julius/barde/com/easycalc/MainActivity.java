@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
     private double firstNumber=0, secondNumber=0, result=0;
     private String firstText, secondText;
     DecimalFormat formatter = new DecimalFormat("#,###");
-    String formatted = formatter.format(result);
     Operators myOperators = new Operators();
 
     @Override
@@ -31,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
         firstText = firstNumber_et.getText().toString();
         secondText = secondNumber_et.getText().toString();
+
+
+    }
+    public void setValues(){
+
         firstNumber = Double.parseDouble(firstText);
         secondNumber = Double.parseDouble(secondText);
 
@@ -38,36 +42,61 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void add(View view) {
-        if(String.valueOf(findViewById(R.id.firstNum_et))==null||String.valueOf(findViewById(R.id.secondNum_et))==null)
-            Toast.makeText(this, "Enter complete input", Toast.LENGTH_SHORT).show();
+        findViews();
+            if(firstText.matches("")||secondText.matches(""))
+            Toast.makeText(this, "Incomplete Input", Toast.LENGTH_SHORT).show();
 
 
 
         else{
-            findViews();
+           setValues();
             result = myOperators.Add(firstNumber, secondNumber);
             result_tv.setText(formatResult());
-        }
+}
     }
 
     public void minus(View view) {
         findViews();
-        result = myOperators.Minus(firstNumber, secondNumber);
-        result_tv.setText(formatResult());
+        if(firstText.matches("")||secondText.matches(""))
+            Toast.makeText(this, "Incomplete Input", Toast.LENGTH_SHORT).show();
+
+
+
+        else{
+            setValues();
+            result = myOperators.Minus(firstNumber, secondNumber);
+            result_tv.setText(formatResult());
+        }
 
     }
 
 
     public void multiply(View view) {
         findViews();
-        result = myOperators.Multiply(firstNumber, secondNumber);
-        result_tv.setText(formatResult());
+        if(firstText.matches("")||secondText.matches(""))
+            Toast.makeText(this, "Incomplete Input", Toast.LENGTH_SHORT).show();
+
+
+
+        else{
+            setValues();
+            result = myOperators.Multiply(firstNumber, secondNumber);
+            result_tv.setText(formatResult());
+        }
     }
 
     public void divide(View view) {
         findViews();
-        result = myOperators.Divide(firstNumber, secondNumber);
-        result_tv.setText(formatResult());
+        if(firstText.matches("")||secondText.matches(""))
+            Toast.makeText(this, "Incomplete Input", Toast.LENGTH_SHORT).show();
+
+
+
+        else{
+            setValues();
+            result = myOperators.Divide(firstNumber, secondNumber);
+            result_tv.setText(formatResult());
+        }
     }
 
     public void exit(View view) {
@@ -85,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         DecimalFormat formatter = new DecimalFormat("#,###");
-        String formatted = formatter.format(result);
-        return formatted;
+
+        return formatter.format(result);
 
     }
 }
